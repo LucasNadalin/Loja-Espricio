@@ -26,6 +26,18 @@ const produtoModel = {
         }
     },
 
+
+    /**
+     * 
+     * Busca apenas um produto no banco de dados
+     * 
+     * @async
+     * @function buscarUm
+     * @param {string} idProduto - Id do produto em UUID no banco de dados.
+     * @returns {Promise<Array>} - Retorna uma lista com um produto caso encontre no banco de dados.
+     * @throws Mostra no console e propaga o erro caso a busca falhe.
+     * 
+     */
     buscarUm: async (idProduto) => {
         try {
             const pool = await getConnection();
@@ -40,7 +52,7 @@ const produtoModel = {
                 .query(querySQL)
 
             return result.recordset;
-            
+
         } catch (error) {
             console.error("Erro ao buscar o produto: ", error);
             throw error;
@@ -76,6 +88,43 @@ const produtoModel = {
         } catch (error) {
             console.error("Erro ao inserir produtos: ", error);
             throw error; // Reverberar o erro para a função que o chamar.
+        }
+    },
+
+
+    /**
+     * 
+     * Atualiza os produtos no banco de dados
+     * 
+     * @async
+     * @function atualizarProduto
+     * @param {string} idProduto - Id do produto em UUID no banco de dados.
+     * @param {string} nomeProduto - Nome do produto a ser atualizado.
+     * @param {number} precoProduto - Preço do produto a ser atualizado.
+     * @returns {Promise<void>} Não retorna nada, apenas executa a atualização.
+     * @throws Mostra no console e propaga o erro caso a atualização falhe.
+     * 
+     */
+    atualizarProduto: async (idProduto, nomeProduto, precoProduto) => {
+        try {
+            const pool = await getConnection();
+
+            const querySQL = `
+                UPDATE Produtos
+                SET nomeProduto = @nomeProduto,
+                    precoProduto = @precoProduto
+                WHERE idProduto = @idProduto
+            `;
+
+            await pool.request()
+                .input("idProduto", sql.UniqueIdentifier, idProduto)
+                .input("nomeProduto", sql.VarChar(100), nomeProduto)
+                .input("precoProduto", sql.Decimal(10,2), precoProduto)
+                .query(querySQL);
+
+        } catch (error) {
+            console.error("Erro ao atualizar o produto: ", error);
+            throw error;
         }
     }
 }
