@@ -55,6 +55,26 @@ const clienteModel = {
         }
     },
 
+    buscarID: async (idCliente) => {
+        try {
+            const pool = await getConnection();
+            const querySQL = `
+            SELECT * FROM Clientes
+            WHERE idCliente = @idCliente
+          `;
+
+            const result = await pool.request()
+            .input("idCliente", sql.Char, idCliente)
+            .query(querySQL);
+
+            return result.recordset;
+
+        } catch (error) {
+            console.error("Erro ao buscar o cliente: ", error);
+            throw error;
+        }
+    },
+
     /**
      * Insere um novo cliente no banco de dados
      * 
@@ -86,7 +106,50 @@ const clienteModel = {
             console.error("Erro ao adicionar clientes: ", error);
             throw error;
         }
+    },
+
+     atualizarCliente: async (idCliente, nomeCliente, cpfCliente) => {
+        try {
+            const pool = await getConnection();
+
+            const querySQL = `
+                UPDATE Clientes
+                SET nomeCliente = @nomeCliente,
+                    cpfCliente = @cpfCliente
+                WHERE idCliente = @idCliente
+            `;
+
+            await pool.request()
+                .input("idCliente", sql.UniqueIdentifier, idCliente)
+                .input("nomeCliente", sql.VarChar(100), nomeCliente)
+                .input("cpfCliente", sql.char(11), cpfCliente)
+                .query(querySQL);
+
+        } catch (error) {
+            console.error("Erro ao atualizar o cliente: ", error);
+            throw error;
+        }
+    },
+
+     deletarCliente: async (idCliente) => {
+        try {
+            const pool = await getConnection();
+
+            const querySQL = `
+                DELETE FROM Clientes
+                WHERE idCliente = @idCliente
+            `;
+
+            await pool.request()
+            .input("idCliente", sql.UniqueIdentifier, idCliente)
+            .query(querySQL)
+
+        } catch (error) {
+            console.error("Erro ao deletar o cliente: ", error);
+            throw error;
+        }
     }
+
 }
 
 module.exports = { clienteModel };

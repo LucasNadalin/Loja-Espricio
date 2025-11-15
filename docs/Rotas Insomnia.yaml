@@ -1,0 +1,238 @@
+type: collection.insomnia.rest/5.0
+name: Scratch Pad
+meta:
+  id: wrk_scratchpad
+  created: 1762465071964
+  modified: 1762465071964
+  description: ""
+collection:
+  - name: Produtos
+    meta:
+      id: fld_627c592af61e4038b0aa58b2e1ffbb47
+      created: 1762466969262
+      modified: 1763160222427
+      sortKey: -1762466969262
+      description: ""
+    children:
+      - url: " http://localhost:8082/produtos"
+        name: Listar Produtos
+        meta:
+          id: req_888e9638dec04a4facc433e03e89add4
+          created: 1762471143315
+          modified: 1763164100972
+          isPrivate: false
+          description: ""
+          sortKey: -1763160226467
+        method: GET
+        parameters:
+          - id: pair_4d06bba4b7484fc28485eb843ba27ec9
+            name: idProduto
+            value: F32D13B8-7913-48B6-B8C4-857D28E48303
+            description: ""
+            disabled: true
+        headers:
+          - name: User-Agent
+            value: insomnia/12.0.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: " http://localhost:8082/produtos"
+        name: Criar Produtos
+        meta:
+          id: req_b266ac9daa3440299e7fefc5fbd75ed3
+          created: 1762471176938
+          modified: 1763164102875
+          isPrivate: false
+          description: ""
+          sortKey: -1763160226417
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            		"nomeProduto": "RTX 5070",
+            		"precoProduto": 1700.00
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.0.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: " http://localhost:8082/produtos/F32D13B8-7913-48B6-B8C4-857D28E48303"
+        name: Atualizar Produtos
+        meta:
+          id: req_9f06885e4931454d8e996b338ffdabf9
+          created: 1763079912094
+          modified: 1763164095663
+          isPrivate: false
+          description: ""
+          sortKey: -1763160226367
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |
+            
+            	{
+            		"precoProduto": 1800
+            	}
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.0.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: " http://localhost:8082/produtos/D14AA380-730C-4DA0-B9CB-F7598A3703FA"
+        name: Deletar Produtos
+        meta:
+          id: req_36a47abece6e4145adc5048693106973
+          created: 1763160226267
+          modified: 1763164099532
+          isPrivate: false
+          description: ""
+          sortKey: -1763120069080.5
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.0.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Clientes
+    meta:
+      id: fld_e4d96601b1034f6e9f5f0a96d1ed5c12
+      created: 1762559994081
+      modified: 1763164033026
+      sortKey: -1762559994081
+      description: ""
+    children:
+      - url: " http://localhost:8082/clientes"
+        name: Listar Clientes
+        meta:
+          id: req_fa14d7f2322a466e9bf069d7856fb75c
+          created: 1762559999580
+          modified: 1763164088957
+          isPrivate: false
+          description: ""
+          sortKey: -1763164041265
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.0.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: " http://localhost:8082/clientes"
+        name: Cadastrar Clientes
+        meta:
+          id: req_db625970a77d4d50a7e9eb750e107743
+          created: 1762560017536
+          modified: 1763164091127
+          isPrivate: false
+          description: ""
+          sortKey: -1763164041215
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nomeCliente": "João",
+            	"cpfCliente": "51864221914"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.0.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: " http://localhost:8082/clientes/582CD705-3D23-4BE4-B9E9-160B2870CE25"
+        name: Deletar Clientes
+        meta:
+          id: req_f450ae13806747d69efef47f6388cbfe
+          created: 1763164038280
+          modified: 1763164195209
+          isPrivate: false
+          description: ""
+          sortKey: -1763164038280
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.0.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: " http://localhost:8082/clientes/582CD705-3D23-4BE4-B9E9-160B2870CE25"
+        name: Atualizar Clientes
+        meta:
+          id: req_f228a105e3cd46a1a5c8216e1eda2e64
+          created: 1763164041165
+          modified: 1763164189443
+          isPrivate: false
+          description: ""
+          sortKey: -1763164041165
+        method: PUT
+        headers:
+          - name: User-Agent
+            value: insomnia/12.0.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1762465119090
+    modified: 1762465119090
+environments:
+  name: Base Environment
+  meta:
+    id: env_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1762465119085
+    modified: 1762465119085
+    isPrivate: false

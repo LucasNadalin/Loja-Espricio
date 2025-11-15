@@ -80,10 +80,12 @@ const produtoModel = {
                 VALUES (@nomeProduto, @precoProduto)
             `
 
-            await pool.request()
+            const result = await pool.request()
                 .input("nomeProduto", sql.VarChar(100), nomeProduto) //input detecta como texto e não como um comando
                 .input("precoProduto", sql.Decimal(10, 2), precoProduto) //prevenindo SQL injection
                 .query(querySQL);
+
+            console.log(result);
 
         } catch (error) {
             console.error("Erro ao inserir produtos: ", error);
@@ -119,11 +121,41 @@ const produtoModel = {
             await pool.request()
                 .input("idProduto", sql.UniqueIdentifier, idProduto)
                 .input("nomeProduto", sql.VarChar(100), nomeProduto)
-                .input("precoProduto", sql.Decimal(10,2), precoProduto)
+                .input("precoProduto", sql.Decimal(10, 2), precoProduto)
                 .query(querySQL);
 
         } catch (error) {
             console.error("Erro ao atualizar o produto: ", error);
+            throw error;
+        }
+    },
+
+
+    /**
+     * Deleta um produto no banco de dados.
+     * 
+     * @async
+     * @function deletarProduto
+     * @param {string} idProduto - Id do produto em UUID no banco de dados.
+     * @returns {Promise<void>} Não retorna nada, apenas deleta o produto.
+     * @throws Mostra no console e propaga o erro caso a remoção do produto falhe.
+     * 
+     */
+    deletarProduto: async (idProduto) => {
+        try {
+            const pool = await getConnection();
+
+            const querySQL = `
+                DELETE FROM Produtos
+                WHERE idProduto = @idProduto
+            `;
+
+            await pool.request()
+            .input("idProduto", sql.UniqueIdentifier, idProduto)
+            .query(querySQL)
+
+        } catch (error) {
+            console.error("Erro ao deletar o produto: ", error);
             throw error;
         }
     }

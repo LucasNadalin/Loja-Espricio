@@ -32,7 +32,7 @@ const produtoController = {
 
         } catch (error) {
             console.error("Erro ao listar produtos: ", error);
-            res.status(500).json({ erro: "Erro ao buscar produtos." });
+            res.status(500).json({ erro: "Erro interno do servidor ao buscar produtos." });
         }
     },
 
@@ -70,10 +70,17 @@ const produtoController = {
 
         } catch (error) {
             console.error("Erro ao cadastrar produtos: ", error);
-            res.status(500).json({ erro: "Erro ao cadastrar produtos." });
+            res.status(500).json({ erro: "Erro interno do servidor ao cadastrar produtos." });
         }
     },
 
+    /**
+     * @async
+     * @function atualizarProduto
+     * @param {object} req - Objeto da requisição (recebido do cliente HTTP) 
+     * @param {object} res - Objeto da resposta (enviado ao cliente HTTP)
+     * @returns {Promise<void>} Retorna uma mensagem de sucesso ou erro em formato JSON.
+     */
     atualizarProduto: async (req, res) => {
         try {
             const { idProduto } = req.params;
@@ -86,8 +93,8 @@ const produtoController = {
 
             const produto = await produtoModel.buscarUm(idProduto);
 
-            if(!produto || produto.length !== 1){
-                return res.status(404).json({erro: "Produto não encontrado!"})
+            if (!produto || produto.length !== 1) {
+                return res.status(404).json({ erro: "Produto não encontrado!" })
             }
 
             const produtoAtual = produto[0];
@@ -97,11 +104,42 @@ const produtoController = {
 
             await produtoModel.atualizarProduto(idProduto, nomeAtualizado, precoAtualizado);
 
-            res.status(200).json({mensagem: "Produto atualizado com sucesso!"})
+            res.status(200).json({ mensagem: "Produto atualizado com sucesso!" })
 
         } catch (error) {
             console.error("Erro ao atualizar as informações do produto: ", error);
             res.status(500).json({ erro: "Erro interno no servidor ao atualizar as informações do produto!" });
+        }
+    },
+
+    /**
+     * @async
+     * @function deletarProduto
+     * @param {object} req - Objeto da requisição (recebido do cliente HTTP) 
+     * @param {object} res - Objeto da resposta (enviado ao cliente HTTP) 
+     * @returns {Promise<void>} Retorna uma mensagem de sucesso ou erro em formato JSON. 
+     */
+    deletarProduto: async (req, res) => {
+        try {
+            const { idProduto } = req.params;
+
+            if (idProduto.length != 36) {
+                return res.status(400).json({ erro: "Id do produto inválido!" });
+            };
+
+            const produto = await produtoModel.buscarUm(idProduto);
+
+            if (!produto || produto.length !== 1) {
+                return res.status(404).json({ erro: "Produto não encontrado!" })
+            };
+
+            await produtoModel.deletarProduto(idProduto);
+
+            res.status(200).json({ mensagem: "Produto deletado com sucesso!" })
+
+        } catch (error) {
+            console.error("Erro ao deletar produto: ", error);
+            res.status(500).json({ erro: "Erro interno no servidor ao deletar produto!" });
         }
     }
 };
