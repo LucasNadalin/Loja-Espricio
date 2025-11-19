@@ -126,7 +126,7 @@ collection:
     meta:
       id: fld_e4d96601b1034f6e9f5f0a96d1ed5c12
       created: 1762559994081
-      modified: 1763164033026
+      modified: 1763589373431
       sortKey: -1762559994081
       description: ""
     children:
@@ -156,7 +156,7 @@ collection:
         meta:
           id: req_db625970a77d4d50a7e9eb750e107743
           created: 1762560017536
-          modified: 1763164091127
+          modified: 1763589171255
           isPrivate: false
           description: ""
           sortKey: -1763164041215
@@ -165,8 +165,8 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"nomeCliente": "João",
-            	"cpfCliente": "51864221914"
+            	"nomeCliente": "Jão",
+            	"cpfCliente": "51864221912"
             }
         headers:
           - name: Content-Type
@@ -181,12 +181,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: " http://localhost:8082/clientes/582CD705-3D23-4BE4-B9E9-160B2870CE25"
+      - url: " http://localhost:8082/clientes/F9B872F4-D7C6-4EAE-86E3-264D4E8B5247"
         name: Deletar Clientes
         meta:
           id: req_f450ae13806747d69efef47f6388cbfe
           created: 1763164038280
-          modified: 1763164195209
+          modified: 1763589196084
           isPrivate: false
           description: ""
           sortKey: -1763164038280
@@ -202,17 +202,26 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: " http://localhost:8082/clientes/582CD705-3D23-4BE4-B9E9-160B2870CE25"
+      - url: " http://localhost:8082/clientes/9F18DDDB-8BC3-43A9-A5A1-1210F736D01E"
         name: Atualizar Clientes
         meta:
           id: req_f228a105e3cd46a1a5c8216e1eda2e64
           created: 1763164041165
-          modified: 1763164189443
+          modified: 1763590670193
           isPrivate: false
           description: ""
           sortKey: -1763164041165
         method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nomeCliente": "José",
+            	"cpfCliente": "12345678912"
+            }
         headers:
+          - name: Content-Type
+            value: application/json
           - name: User-Agent
             value: insomnia/12.0.0
         settings:

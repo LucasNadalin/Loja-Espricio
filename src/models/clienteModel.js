@@ -55,6 +55,15 @@ const clienteModel = {
         }
     },
 
+       /**
+     * 
+     * Retorna todos os dados de um cliente no banco de dados, usando ID que será fornecido
+     * 
+     * @async
+     * @param {string} idCliente
+     * @returns {Promise<Array>}
+     * @throws mostra no console e propaga o erro caso a busca falhe.
+     */
     buscarID: async (idCliente) => {
         try {
             const pool = await getConnection();
@@ -108,6 +117,19 @@ const clienteModel = {
         }
     },
 
+
+    /**
+     * Atualiza as informações de um cliente no banco de dados
+     * 
+     * @async
+     * @function atualizarCliente
+     * @param {string} idCliente - Id que será usado para buscar o cliente
+     * @param {string} nomeCliente - Nome do cliente que será adicionado
+     * @param {string} cpfCliente - CPF do cliente
+     * @returns {Promise<void>} Não retorna nada, apenas executa a inserção
+     * @throws Mostra no console e propaga o erro caso a inserção falhe.
+     * 
+     */
      atualizarCliente: async (idCliente, nomeCliente, cpfCliente) => {
         try {
             const pool = await getConnection();
@@ -122,7 +144,7 @@ const clienteModel = {
             await pool.request()
                 .input("idCliente", sql.UniqueIdentifier, idCliente)
                 .input("nomeCliente", sql.VarChar(100), nomeCliente)
-                .input("cpfCliente", sql.char(11), cpfCliente)
+                .input("cpfCliente", sql.Char(11), cpfCliente)
                 .query(querySQL);
 
         } catch (error) {
@@ -131,6 +153,16 @@ const clienteModel = {
         }
     },
 
+
+   /**
+     * 
+     * Deleta um cliente do banco de dados
+     * 
+     * @async
+     * @param {string} idCliente - Id do produto em UUID no banco de dados.
+     * @returns {Promise<Array>}
+     * @throws mostra no console e propaga o erro caso a busca falhe.
+     */
      deletarCliente: async (idCliente) => {
         try {
             const pool = await getConnection();
