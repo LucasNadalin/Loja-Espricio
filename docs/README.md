@@ -100,7 +100,7 @@
 #### GET /clientes
 - **Descrição**: Obtém uma lista de clientes
 - **Response**: Array de clientes
-```
+
 - **Error Response (400)**: Caso o id não esteja em formato UUID
 ```
 { 

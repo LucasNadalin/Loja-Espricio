@@ -73,7 +73,8 @@ const clienteController = {
      * @param {object} res - Objeto da resposta (enviado ao cliente HTTP)
      * @returns {Promise<void>} Retorna uma mensagem de sucesso ou erro em formato JSON.
      * @throws {400} Se algum campo não for preenchido corretamente.
-     * @throws {409} Se houver a tentativa do cadastro de um CPF já existente no banco de dados
+     * @throws {400} Se houver a tentativa de colocar um CPF com menos digitos
+     * @throws {409} Se houver a tentativa de atualizar um CPF colocando um que já existente no banco de dados
      * @throws {500} Se ocorrer qualquer erro interno no servidor.
      */
     atualizarCliente: async (req, res) => {
