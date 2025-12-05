@@ -40,11 +40,11 @@ const clienteController = {
      */
     cadastrarCliente: async (req, res) => {
         try {
-            const { nomeCliente, cpfCliente } = req.body;
+            const { nomeCliente, cpfCliente, emailCliente, senhaCliente } = req.body;
 
             const verificacaoCPF = await clienteModel.buscarCpf(cpfCliente)
 
-            if (nomeCliente == undefined || nomeCliente.trim() == "" || cpfCliente == undefined || cpfCliente == "", cpfCliente.length != 11) {
+            if (nomeCliente == undefined || nomeCliente.trim() == "" || cpfCliente == undefined || cpfCliente == "", cpfCliente.length != 11 || emailCliente == undefined || emailCliente.trim() == "" || senhaCliente == undefined || senhaCliente.trim() == "") {
                 return res.status(400).json({ erro: "Campos obrigatórios não preenchidos" });
             }
 
@@ -56,7 +56,7 @@ const clienteController = {
                 return res.status(409).json({ erro: "Esse CPF já está cadastrado!" });
             }
 
-            await clienteModel.adicionarClientes(nomeCliente, cpfCliente);
+            await clienteModel.adicionarClientes(nomeCliente, cpfCliente, emailCliente, senhaCliente);
 
             res.status(201).json({ message: "Cliente cadastrado com sucesso!" });
 
