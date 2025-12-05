@@ -27,7 +27,7 @@ const clienteController = {
     },
 
     /**
-   * Controlador que cria um novo cliente no banco de dados
+     * Insere um novo cliente no banco de dados 
      * 
      * @async
      * @function cadastrarCliente

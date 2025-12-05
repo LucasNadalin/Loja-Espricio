@@ -115,6 +115,8 @@
 {
     "nomecliente": "clienteExemplo",
     "cpfCliente": "12345678999"
+    "emailCliente": "email@gmail.com"
+    "senhaCliente": "senhaexemplo"
 }
 ```
 - **Response**:
