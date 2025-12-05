@@ -1,5 +1,4 @@
 const { sql, getConnection } = require("../config/db");
-const bcrypt = require("bcrypt");
 
 const clienteModel = {
     /**
@@ -99,10 +98,6 @@ const clienteModel = {
 
             const pool = await getConnection();
 
-            const saltRounds = 10;
-
-            const senhaCriptografada = bcrypt.hashSync(senhaCliente, saltRounds);
-
             const querySQL = `
                 INSERT INTO Clientes (nomeCliente, cpfCliente, emailCliente, senhaCliente)
                 VALUES (@nomeCliente, @cpfCliente, @emailCliente, @senhaCliente)
@@ -112,7 +107,7 @@ const clienteModel = {
                 .input("nomeCliente", sql.VarChar(100), nomeCliente)
                 .input("cpfCliente", sql.Char(11), cpfCliente)
                 .input("emailCliente", sql.VarChar(200), emailCliente)
-                .input("senhaCliente", sql.VarChar(250), senhaCriptografada)
+                .input("senhaCliente", sql.VarChar(250), senhaCliente)
                 .query(querySQL);
 
 

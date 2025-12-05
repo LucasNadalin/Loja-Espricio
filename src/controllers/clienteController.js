@@ -1,4 +1,5 @@
 const { clienteModel } = require("../models/clienteModel")
+const bcrypt = require("bcrypt");
 
 const clienteController = {
 
@@ -56,7 +57,11 @@ const clienteController = {
                 return res.status(409).json({ erro: "Esse CPF já está cadastrado!" });
             }
 
-            await clienteModel.adicionarClientes(nomeCliente, cpfCliente, emailCliente, senhaCliente);
+            const saltRounds = 10;
+
+            const senhaCriptografada = bcrypt.hashSync(senhaCliente, saltRounds);
+
+            await clienteModel.adicionarClientes(nomeCliente, cpfCliente, emailCliente, senhaCriptografada);
 
             res.status(201).json({ message: "Cliente cadastrado com sucesso!" });
 
