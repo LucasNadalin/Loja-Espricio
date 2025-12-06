@@ -1,10 +1,10 @@
 const sql = require("mssql");
 
 const config = {
-    user: "sa",
-    password: "123456789",
-    server: "localhost",
-    database: "LojaEspricio",
+    user: process.env.USER_DB,
+    password: process.env.PASSWORD_DB,
+    server: process.env.SERVER_DB,
+    database: process.env.NAME_DB,
     options: {
         encrypt: true,
         trustServerCertificate: true
@@ -33,12 +33,13 @@ async function getConnection() {
     }
 };
 
-// (async () => {
-//     const pool = await getConnection();
+//  (async () => {
+//      const pool = await getConnection();
 
-//     const result = await pool.request().query("SELECT * FROM Produtos")
+//     if(pool){
+//         console.log("Conexão foi")
+//     }
 
-//     console.log(result.recordset);
-// })()
+//  })()
 
 module.exports = { sql, getConnection };
