@@ -7,7 +7,11 @@ const { clienteRoutes } = require("./src/routes/clienteRoutes");
 
 const PORT = process.env.PORT;
 
+const cookieParser = require("cookie-parser");
+
 app.use(express.json());
+
+app.use(cookieParser());
 
 app.use("/", produtoRoutes);
 

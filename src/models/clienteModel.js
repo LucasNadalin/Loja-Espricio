@@ -55,6 +55,26 @@ const clienteModel = {
         }
     },
 
+    buscarEmailOrCPF: async (cpfCliente, emailCliente) => {
+        try {
+            const pool = await getConnection();
+
+            let querySQL = "SELECT * FROM Clientes WHERE cpfCliente = @cpfCliente OR emailCliente = @emailCliente";
+
+            const result = await pool
+            .request()
+            .input("cpfCliente", sql.Char(11), cpfCliente)
+            .input("emailCliente", sql.VarChar(200), emailCliente)
+            .query(querySQL);
+
+            return result.recordset;
+
+        } catch (error) {
+            console.error("Erro ao buscar cliente", error);
+            throw error;
+        }
+    },
+
     /**
   * 
   * Retorna todos os dados de um cliente no banco de dados, usando ID que será fornecido
